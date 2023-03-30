@@ -1,5 +1,5 @@
-package.path = package.path .. ";/home/ubuntu/nix/nvim/lua/?.lua"
-package.path = package.path .. ";/home/ubuntu/nix/nvim/?.lua"
+package.path = package.path .. ";/home/$USER/nix/nvim/lua/?.lua"
+package.path = package.path .. ";/home/$USER/nix/nvim/?.lua"
 
 vim.cmd("colorscheme jellybeans")
 

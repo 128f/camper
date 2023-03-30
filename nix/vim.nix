@@ -72,6 +72,6 @@ pkgs:
 
     extraConfig =
       ''
-        :luafile /home/ubuntu/nix/nvim/init.lua
+        :luafile /home/$USER/nix/nvim/init.lua
       '';
 }
