@@ -1,12 +1,12 @@
 { config, pkgs, ... }:
 let
-    customNeovim = import "/home/$USER/nix/vim.nix";
+    customNeovim = import "/home/ubuntu/nix/vim.nix";
 in
 {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  home.username = "$USER";
-  home.homeDirectory = "/home/$USER";
+  home.username = "ubuntu";
+  home.homeDirectory = "/home/ubuntu";
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
@@ -23,7 +23,7 @@ in
   programs.git.enable = true;
   programs.neovim = customNeovim pkgs;
   xdg.configFile.nvim = {
-    source = /home/$USER/nix/nvim;
+    source = /home/ubuntu/nix/nvim;
     recursive = true;
   };
 }

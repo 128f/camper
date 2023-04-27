@@ -1,16 +1,14 @@
 ---
 - name: Install anconda
-  hosts: 127.0.0.1
-  connection: local
+  hosts: server
   gather_facts: true
   tasks:
    - name: Ansible copy file to remote server
      copy:
        src: ~/Downloads/Anaconda3-2023.03-Linux-x86_64.sh
-       dest: ~/Downloads/Anaconda3-2023.03-Linux-x86_64.sh
+       dest: ~/Anaconda3-2023.03-Linux-x86_64.sh
    - name: Run the Anaconda installer
-     command: bash ~/Downloads/Anaconda3-2023.03-Linux-x86_64.sh -b 
-
+     command: bash ~/Anaconda3-2023.03-Linux-x86_64.sh -b 
    - name: Add path and initialize conda
      shell: export PATH=~/anaconda3/bin:$PATH && conda init
      args:

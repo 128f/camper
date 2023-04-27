@@ -1,0 +1,22 @@
+- name: Install nvidia drivers and utils
+  hosts: server
+  gather_facts: true
+  become: true
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+    - name: Install package(s)
+      apt:
+        name:
+          - driverctl
+          - ubuntu-drivers-common
+        state: present
+    - name: install nvidia ubuntu drivers
+      command: sudo ubuntu-drivers install nvidia:525
+    - name: Install package(s)
+      apt:
+        name:
+          - libnvidia-compute-525-server
+          - nvidia-utils-525-server
+        state: present

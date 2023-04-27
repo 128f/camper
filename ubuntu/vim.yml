@@ -1,10 +1,8 @@
 ---
 - name: Install nix
-  hosts: localhost
+  hosts: server
   gather_facts: true
   tasks:
-    - name: Install wget
-      command: "sudo pacman --noconfirm -Sq wget"
     - name: Download nix installer
       command: "wget https://nixos.org/nix/install"
     - name: Install nix
@@ -14,31 +12,31 @@
       args:
         executable: /bin/bash
       environment:
-        PATH: "/home/$USER/.nix-profile/bin:{{ ansible_env.PATH }}"
+        PATH: "/home/ubuntu/.nix-profile/bin:{{ ansible_env.PATH }}"
     - name: Update nix sources
       shell: "nix-channel --update"
       args:
         executable: /bin/bash
       environment:
-        PATH: "/home/$USER/.nix-profile/bin:{{ ansible_env.PATH }}"
+        PATH: "/home/ubuntu/.nix-profile/bin:{{ ansible_env.PATH }}"
     - name: Workaround for temporary home-manager bug
-      shell: "mkdir -m 0755 -p /nix/var/nix/{profiles,gcroots}/per-user/$USER"
+      shell: "mkdir -m 0755 -p /nix/var/nix/{profiles,gcroots}/per-user/ubuntu"
       args:
         executable: /bin/bash
     - name: Download nix installer
       command: "mkdir -p ~/.config/nixpkgs/"
     - name: Copy home.nix
       ansible.builtin.copy:
-        src: ./home.nix
-        dest: ~/.config/home-manager/home.nix
+        src: ../home.nix
+        dest: ~/.config/nixpkgs/home.nix
     - name: Copy nix directory
       ansible.builtin.copy:
-        src: ./nix
+        src: ../nix
         dest: ~/
     - name: Install home manager
       shell: "nix-shell '<home-manager>' -A install"
       args:
         executable: /bin/bash
       environment:
-        PATH: "/home/$USER/.nix-profile/bin:{{ ansible_env.PATH }}"
-        NIX_PATH: "/home/$USER/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/$USER/channels"
+        PATH: "/home/ubuntu/.nix-profile/bin:{{ ansible_env.PATH }}"
+        NIX_PATH: "/home/ubuntu/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/ubuntu/channels"

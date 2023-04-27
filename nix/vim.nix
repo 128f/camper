@@ -22,9 +22,12 @@ pkgs:
 
       # Color themes/syntax highlighting
       jellybeans-vim
+      catppuccin-nvim
       nvim-base16
+
       rust-vim # Also makes things work like formatting and cargo integration
       vim-nix # nix syntax highlighting
+      yuck-vim
 
       # LSP plugins
       nvim-lspconfig  # Collection of common configurations for the Nvim LSP client
@@ -48,30 +51,22 @@ pkgs:
 
       vim-commentary
       vim-easy-align
-      (nvim-treesitter.withPlugins (plugins: with pkgs.tree-sitter-grammars; [
-        tree-sitter-bash
-        tree-sitter-c
-        tree-sitter-comment
-        tree-sitter-cpp
-        tree-sitter-css
-        tree-sitter-dockerfile
-        tree-sitter-dot
-        tree-sitter-fish
-        tree-sitter-go
-        tree-sitter-gomod
-        tree-sitter-html
-        tree-sitter-http
-        tree-sitter-java
-        tree-sitter-javascript
-        tree-sitter-jsdoc
-        tree-sitter-json
-        tree-sitter-json5
-        tree-sitter-rust
+      (nvim-treesitter.withPlugins (
+        plugins: with plugins; [
+          nix
+          terraform
+          python
+          rust
+          c
+          go
+          typescript
+          javascript
+          yuck
       ]))
     ];
 
     extraConfig =
       ''
-        :luafile /home/$USER/nix/nvim/init.lua
+        :luafile /home/ubuntu/nix/nvim/init.lua
       '';
 }
