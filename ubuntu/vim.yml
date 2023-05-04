@@ -29,6 +29,10 @@
       ansible.builtin.copy:
         src: ../home.nix
         dest: ~/.config/nixpkgs/home.nix
+    - name: Copy home.nix
+      ansible.builtin.copy:
+        src: ../home.nix
+        dest: ~/.config/home-manager/home.nix
     - name: Copy nix directory
       ansible.builtin.copy:
         src: ../nix
